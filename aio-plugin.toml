@@ -5,5 +5,5 @@ path = "client"
 path = "server"
 
 [plugin.runtime]
-kind = "page-definition"
-artifact = "runtime/pages.json"
+kind = "wasm-component"
+artifact = "dist/hello.wasm"

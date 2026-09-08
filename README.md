@@ -1,6 +1,6 @@
 # Hello
 
-此仓库是 AIO 最小全栈插件。`client` 和 `server` 提供 Rust 源码扩展，`runtime/pages.json` 提供可在线安装和卸载的 `PageDefinition` 产物。两种形态使用同一个 Git 提交作为发布与回滚单元。
+此仓库是 AIO 最小全栈插件。`client` 和 `server` 提供 Rust 源码扩展，`component` 将 `PageDefinition` 编译为 `aio:plugin/page@1` Wasm Component。宿主用 Wasmtime 校验并实例化组件，安装、停用、卸载和回滚都不需要重建宿主。
 
 ```bash
 aio plugin install <git>

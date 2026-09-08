@@ -1,0 +1,14 @@
+[package]
+name = "aio-plugin-hello-component"
+version.workspace = true
+edition.workspace = true
+license = "MIT"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+wit-bindgen = "0.61.1"
+
+[lints.rust]
+unsafe_code = "allow"

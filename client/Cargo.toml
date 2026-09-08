@@ -7,8 +7,8 @@ license.workspace = true
 [dependencies]
 dill = "0.15.0"
 dioxus = { version = "=0.7.9", default-features = false, features = ["macro", "html"] }
-az-dioxus-admin-shell = { git = "https://github.com/zjarlin/dioxus-admin-workbench.git", rev = "b2d33b9eb404ef06e924eb658403cd3b55d98c98", default-features = false }
-az-ui-components = { git = "https://github.com/zjarlin/dioxus-admin-workbench.git", rev = "b2d33b9eb404ef06e924eb658403cd3b55d98c98" }
+az-dioxus-admin-shell = { git = "https://github.com/zjarlin/dioxus-admin-workbench.git", rev = "7ffc224ce07f12b0726738f5cd7198567e9fb91d", default-features = false }
+az-ui-components = { git = "https://github.com/zjarlin/dioxus-admin-workbench.git", rev = "7ffc224ce07f12b0726738f5cd7198567e9fb91d" }
 
 [lints]
 workspace = true
