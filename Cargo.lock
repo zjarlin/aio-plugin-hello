@@ -25,6 +25,7 @@ dependencies = [
 name = "aio-plugin-hello-component"
 version = "0.1.0"
 dependencies = [
+ "serde_json",
  "wit-bindgen 0.61.1",
 ]
 
