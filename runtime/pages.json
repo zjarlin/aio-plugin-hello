@@ -9,7 +9,7 @@
     },
     "body": {
       "kind": "counter",
-      "title": "Hello",
+      "title": "Hello Runtime",
       "button": "计数加一"
     }
   }
