@@ -1,6 +1,6 @@
 # Hello
 
-此仓库是 AIO 最小全栈插件。`client` 贡献一个带“加一”按钮的 Hello 页面，`server` 贡献健康接口，两端都通过 Dill 注册具体类型。提交到 Git 后执行：
+此仓库是 AIO 最小全栈插件。`client` 和 `server` 提供 Rust 源码扩展，`runtime/pages.json` 提供可在线安装和卸载的 `PageDefinition` 产物。两种形态使用同一个 Git 提交作为发布与回滚单元。
 
 ```bash
 aio plugin install <git>

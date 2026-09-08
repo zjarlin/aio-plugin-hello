@@ -3,3 +3,7 @@ path = "client"
 
 [plugin.server]
 path = "server"
+
+[plugin.runtime]
+kind = "page-definition"
+artifact = "runtime/pages.json"

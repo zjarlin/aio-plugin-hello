@@ -1,0 +1,16 @@
+[
+  {
+    "id": "hello",
+    "label": "Hello",
+    "icon": "panels-top-left",
+    "scene": {
+      "id": "workspace",
+      "label": "工作区"
+    },
+    "body": {
+      "kind": "counter",
+      "title": "Hello",
+      "button": "计数加一"
+    }
+  }
+]
