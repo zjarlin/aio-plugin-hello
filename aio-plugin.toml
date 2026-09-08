@@ -7,3 +7,13 @@ path = "server"
 [plugin.runtime]
 kind = "wasm-component"
 artifact = "dist/hello.wasm"
+
+[plugin.capabilities]
+network = []
+filesystem = []
+database = false
+
+[[plugin.subplugins]]
+id = "hello-screen"
+pages = ["hello"]
+routes = ["hello"]
