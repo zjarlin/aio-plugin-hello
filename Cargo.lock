@@ -122,7 +122,7 @@ dependencies = [
 [[package]]
 name = "az-dioxus-admin-shell"
 version = "2026.8.17"
-source = "git+https://github.com/zjarlin/dioxus-admin-workbench.git?rev=7ffc224ce07f12b0726738f5cd7198567e9fb91d#7ffc224ce07f12b0726738f5cd7198567e9fb91d"
+source = "git+https://github.com/zjarlin/dioxus-admin-workbench.git?rev=11c0d3856e541e3421854a2a96e995ba02546c3a#11c0d3856e541e3421854a2a96e995ba02546c3a"
 dependencies = [
  "anyhow",
  "az-ui-components",
@@ -134,7 +134,7 @@ dependencies = [
 [[package]]
 name = "az-ui-components"
 version = "2026.8.17"
-source = "git+https://github.com/zjarlin/dioxus-admin-workbench.git?rev=7ffc224ce07f12b0726738f5cd7198567e9fb91d#7ffc224ce07f12b0726738f5cd7198567e9fb91d"
+source = "git+https://github.com/zjarlin/dioxus-admin-workbench.git?rev=11c0d3856e541e3421854a2a96e995ba02546c3a#11c0d3856e541e3421854a2a96e995ba02546c3a"
 dependencies = [
  "dioxus",
  "dioxus-icons",

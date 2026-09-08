@@ -18,6 +18,7 @@ impl ApplicationPlugin for PagesPlugin {
                 id: "workspace",
                 label: "工作区",
             },
+            required_permission: None,
             render: PluginPage,
         }]
     }
