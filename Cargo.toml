@@ -1,0 +1,13 @@
+[workspace]
+resolver = "2"
+members = ["client", "server"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+license = "MIT"
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+
+# Cargo 包：aio-plugin-hello-client、aio-plugin-hello-server
