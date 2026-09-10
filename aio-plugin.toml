@@ -1,9 +1,3 @@
-[plugin.client]
-path = "client"
-
-[plugin.server]
-path = "server"
-
 [plugin.runtime]
 kind = "wasm-component"
 artifact = "dist/hello.wasm"
