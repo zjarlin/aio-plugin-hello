@@ -8,9 +8,18 @@
       "label": "工作区"
     },
     "body": {
-      "kind": "counter",
+      "kind": "actions",
       "title": "Hello Runtime",
-      "button": "计数加一"
+      "content": "计数：0",
+      "state": {
+        "count": 0
+      },
+      "actions": [
+        {
+          "id": "increment",
+          "label": "+1"
+        }
+      ]
     }
   }
 ]

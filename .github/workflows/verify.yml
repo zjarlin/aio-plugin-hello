@@ -1,0 +1,79 @@
+name: Verify plugin
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: 保存提交内发布产物
+        run: cp dist/hello.wasm "$RUNNER_TEMP/published-hello.wasm"
+
+      - uses: dtolnay/rust-toolchain@6bed0761d98439e5a578e2877258200ad565ba87 # nightly
+        with:
+          toolchain: nightly
+          targets: wasm32-unknown-unknown
+
+      - name: 测试 Rust 工作区
+        run: cargo test --workspace
+
+      - name: 重建 Wasm Component
+        run: cargo build --release --target wasm32-unknown-unknown -p aio-plugin-hello-component
+
+      - name: 安装 Wasm 校验工具
+        run: cargo install --locked wasm-tools --version 1.245.1
+
+      - name: 验证源码构建产物
+        run: |
+          wasm-tools component new target/wasm32-unknown-unknown/release/aio_plugin_hello_component.wasm -o "$RUNNER_TEMP/rebuilt-hello.wasm"
+          wasm-tools validate --features component-model "$RUNNER_TEMP/rebuilt-hello.wasm"
+          wasm-tools component wit "$RUNNER_TEMP/rebuilt-hello.wasm"
+
+      - name: 恢复并验证提交内发布产物
+        run: |
+          cp "$RUNNER_TEMP/published-hello.wasm" dist/hello.wasm
+          wasm-tools validate --features component-model dist/hello.wasm
+          wasm-tools component wit dist/hello.wasm
+
+      - name: 检出 AIO 校验器
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: zjarlin/aio
+          ref: fd343767a0e74de974d8a57abeeae06032602a82
+          path: aio-host-source
+          submodules: recursive
+
+      - name: 验证 AIO 插件协议
+        run: cargo +nightly run --manifest-path aio-host-source/Cargo.toml --bin aio -- plugin validate "$GITHUB_WORKSPACE"
+
+      - name: 发布已验证的插件
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && vars.AIO_PLUGIN_PUBLISH_URL != ''
+        env:
+          AIO_PLUGIN_PUBLISH_TOKEN: ${{ secrets.AIO_PLUGIN_PUBLISH_TOKEN }}
+          AIO_PLUGIN_PUBLISH_URL: ${{ vars.AIO_PLUGIN_PUBLISH_URL }}
+        run: |
+          if [ -z "$AIO_PLUGIN_PUBLISH_TOKEN" ]; then
+            exit 0
+          fi
+          cargo +nightly run --manifest-path aio-host-source/Cargo.toml --bin aio -- plugin publish "$GITHUB_WORKSPACE"
+
+      - name: 检出 Wasmtime 运行时宿主
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: zjarlin/aio-public-shell
+          ref: 4b1cc937c1b674c5425e3547a7c462db6e986d2b
+          path: aio-public-shell
+
+      - name: 验证 Wasmtime 租户隔离
+        env:
+          AIO_TEST_WASM_COMPONENT: ${{ github.workspace }}/dist/hello.wasm
+        working-directory: aio-public-shell
+        run: cargo +nightly test --no-default-features --features server activates_reuses_and_destroys_tenant_instances -- --ignored

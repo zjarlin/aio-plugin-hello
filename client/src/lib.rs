@@ -39,9 +39,9 @@ fn PluginPage() -> Element {
             h2 { "Hello" }
             p { "计数：{value}" }
             Button {
-                aria_label: "计数加一",
+                aria_label: "+1",
                 onclick: move |_| count += 1,
-                "加一"
+                "+1"
             }
         }
     }
